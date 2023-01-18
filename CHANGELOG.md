@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/release-please?activeTab=versions
 
+## [15.2.0](https://github.com/googleapis/release-please/compare/v15.1.2...v15.2.0) (2023-01-18)
+
+
+### Features
+
+* Introduce ChangelogJson updater ([#1808](https://github.com/googleapis/release-please/issues/1808)) ([fe3a979](https://github.com/googleapis/release-please/commit/fe3a979a1c228610612aa2d6c303d408be956e2e))
+
 ## [15.1.2](https://github.com/googleapis/release-please/compare/v15.1.1...v15.1.2) (2023-01-17)
 
 
