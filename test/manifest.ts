@@ -2310,7 +2310,7 @@ describe('Manifest', () => {
         },
         {
           groupPullRequestTitlePattern:
-            'chore${scope}: release${component} v${version}',
+            'chore${scope}: release ${component} v${version}',
         }
       );
       const pullRequests = await manifest.buildPullRequests();

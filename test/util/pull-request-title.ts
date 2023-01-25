@@ -243,6 +243,13 @@ describe('PullRequestTitle with custom pullRequestTitlePattern', () => {
       );
       expect(pullRequestTitle.toString()).to.eql('chore: 🔖 release 1.2.3');
     });
+    it('builds only version', () => {
+      const pullRequestTitle = PullRequestTitle.ofVersion(
+        Version.parse('1.2.3'),
+        'release(${component}): 🔖 v${version}'
+      );
+      expect(pullRequestTitle.toString()).to.eql('release(): 🔖 v1.2.3');
+    });
   });
   describe('ofComponentVersion', () => {
     it('builds the autorelease versioned branch name with component', () => {
@@ -255,6 +262,14 @@ describe('PullRequestTitle with custom pullRequestTitlePattern', () => {
         'chore: 🔖 release storage 1.2.3'
       );
     });
+    it('builds only component and version', () => {
+      const pullRequestTitle = PullRequestTitle.ofComponentVersion(
+        'foo',
+        Version.parse('1.2.3'),
+        'release(${component}): 🔖 v${version}'
+      );
+      expect(pullRequestTitle.toString()).to.eql('release(foo): 🔖 v1.2.3');
+    });
   });
   describe('ofTargetBranch', () => {
     it('builds branchname with only target branch', () => {
@@ -266,6 +281,14 @@ describe('PullRequestTitle with custom pullRequestTitlePattern', () => {
       expect(pullRequestTitle.toString()).to.eql(
         'chore(main): 🔖 release 1.2.3'
       );
+    });
+    it('builds branchname without target branch', () => {
+      const pullRequestTitle = PullRequestTitle.ofTargetBranchVersion(
+        'main',
+        Version.parse('1.2.3'),
+        'release(${component}): 🔖 v${version}'
+      );
+      expect(pullRequestTitle.toString()).to.eql('release(): 🔖 v1.2.3');
     });
   });
   describe('ofComponentTargetBranch', () => {
@@ -280,7 +303,17 @@ describe('PullRequestTitle with custom pullRequestTitlePattern', () => {
         'chore(main): 🔖 release foo 1.2.3'
       );
     });
+    it('builds only component without target branch', () => {
+      const pullRequestTitle = PullRequestTitle.ofComponentTargetBranchVersion(
+        'foo',
+        'main',
+        Version.parse('1.2.3'),
+        'release(${component}): 🔖 v${version}'
+      );
+      expect(pullRequestTitle.toString()).to.eql('release(foo): 🔖 v1.2.3');
+    });
   });
+
   describe('generateMatchPattern', () => {
     it('return matchPattern with custom Pattern', () => {
       const matchPattern = generateMatchPattern(
